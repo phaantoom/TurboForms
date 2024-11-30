@@ -158,19 +158,25 @@
                 <div class="formbold-mb-3">
                     <label for="deliveryFee" class="formbold-form-label"> @_localizer["DeliveryFee"] </label>
                     <input type="number"
-                           asp-for="DeliveryFee"
                            id="deliveryFee"
                            placeholder="0"
                            class="formbold-form-input" disabled />
+
+                    <input type="hidden"
+                           asp-for="DeliveryFee"
+                           id="deliveryFeeHidden" />
                 </div>
 
                 <div class="formbold-mb-3">
                     <label for="total" class="formbold-form-label"> @_localizer["Total"] </label>
                     <input type="number"
-                           asp-for="Total"
                            id="total"
                            placeholder="0"
                            class="formbold-form-input" disabled />
+
+                    <input type="hidden"
+                           asp-for="Total"
+                           id="totalHidden" />
                 </div>
 
                 <div class="formbold-input-radio-wrapper">
@@ -308,6 +314,7 @@
                 subTotal = 20;
 
             document.getElementById('deliveryFee').value = subTotal;
+            document.getElementById('deliveryFeeHidden').value = subTotal;
             calculateTotal();
         }
 
@@ -317,6 +324,7 @@
             var order = parseFloat(document.getElementById('orderPrice').value) || 0;
 
             document.getElementById('total').value = delivery + order;
+            document.getElementById('totalHidden').value = delivery + order;
         }
 
         function validateInfo(){
@@ -332,7 +340,7 @@
         }
 
         function getOrderPreview() {
-            
+
             var formData = new FormData(document.getElementById('createOrderForm'));
 
             $.ajax({

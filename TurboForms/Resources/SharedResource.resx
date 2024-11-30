@@ -153,11 +153,17 @@
   <data name="DeliveryFee" xml:space="preserve">
     <value>رسوم التوصيل</value>
   </data>
+  <data name="error" xml:space="preserve">
+    <value>حدث خطأ, حاول مجددا </value>
+  </data>
   <data name="Information" xml:space="preserve">
     <value>بيانات العميل</value>
   </data>
   <data name="Instapay" xml:space="preserve">
     <value>إنستاباي</value>
+  </data>
+  <data name="NewOrder" xml:space="preserve">
+    <value>اوردر جديد</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>التالي</value>
@@ -176,6 +182,9 @@
   </data>
   <data name="PickupDate" xml:space="preserve">
     <value>تاريخ\وقت الاستلام</value>
+  </data>
+  <data name="success" xml:space="preserve">
+    <value>تم تسجيل طلبك بنجاح</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>الإجمالي</value>

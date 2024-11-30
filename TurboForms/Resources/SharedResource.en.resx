@@ -153,11 +153,17 @@
   <data name="DeliveryFee" xml:space="preserve">
     <value>Delivery Fee</value>
   </data>
+  <data name="error" xml:space="preserve">
+    <value>A Problem Occurred</value>
+  </data>
   <data name="Information" xml:space="preserve">
     <value>Customer data</value>
   </data>
   <data name="Instapay" xml:space="preserve">
     <value>Instapay</value>
+  </data>
+  <data name="NewOrder" xml:space="preserve">
+    <value>New Order</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>Next</value>
@@ -176,6 +182,9 @@
   </data>
   <data name="PickupDate" xml:space="preserve">
     <value>Pickup/Delivery date</value>
+  </data>
+  <data name="success" xml:space="preserve">
+    <value> Successfully Ordered</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>Total</value>
