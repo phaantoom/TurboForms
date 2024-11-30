@@ -18,7 +18,6 @@ namespace TurboForms.ViewModels
         public string CustomerPhone { get; set; }
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(TurboForms.Resources.DataAnnotation))]
         public string CustomerAdress { get; set; }
-        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(TurboForms.Resources.DataAnnotation))]
         public string CustomerAdressDetails { get; set; }
         public double OrderPrice { get; set; }
         public double DeliveryFee { get; set; }

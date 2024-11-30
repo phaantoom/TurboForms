@@ -6,20 +6,30 @@
 @model bool;
 
 <div class="page-wrapper">
-    @if(Model){
+    @if (Model)
+    {
 
         <div class="custom-modal">
             <div class="succes succes-animation icon-top"><i class="fa fa-check"></i></div>
             <div class="succes border-bottom"></div>
             <div class="content">
                 <p class="message-type">@_localizer["success"]</p>
+
+                <a asp-action="Index" asp-controller="Home" class="btn" style="margin: 10px 0px;font-size: 16px;
+    border-radius: 5px;
+    padding: 10px 25px;
+    border: none;
+    font-weight: 500;
+    background-color: rgb(151, 211, 97);
+    color: white;
+    cursor: pointer;">
+                    @_localizer["NewOrder"]
+                </a>
             </div>
-            <a asp-action="Index" asp-controller="Home" class="btn formbold-btn">
-                @_localizer["NewOrder"]
-            </a>
         </div>
     }
-    else{
+    else
+    {
 
         <div class="custom-modal">
             <div class="danger danger-animation icon-top"><i class="fa fa-times"></i></div>
@@ -30,6 +40,5 @@
 
         </div>
     }
-
 
 </div>
