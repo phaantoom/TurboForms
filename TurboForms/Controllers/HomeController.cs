@@ -28,7 +28,7 @@ namespace TurboForms.Controllers
             //send to shipday
             var res = await SendToShipday(Order);
 
-            return View(res);
+            return View(true);
         }
         
         [HttpPost]
