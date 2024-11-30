@@ -34,7 +34,7 @@
                     <div class="formbold-radio-flex">
                         <div class="formbold-radio-group">
                             <label class="formbold-radio-label">
-                                <input class="formbold-input-radio" asp-for="OrderStatus" value="true" type="radio" name="OrderStatus" id="OrderStatus">
+                                <input class="formbold-input-radio" asp-for="OrderStatus" value="true" type="radio" name="OrderStatus" id="OrderStatus" checked>
                                 @_localizer["yes"]
                                 <span class="formbold-radio-checkmark"></span>
                             </label>
@@ -179,7 +179,7 @@
                     <div class="formbold-radio-flex">
                         <div class="formbold-radio-group">
                             <label class="formbold-radio-label">
-                                <input class="formbold-input-radio" asp-for="PaymentMethod" value="Cash" type="radio" name="PaymentMethod" id="PaymentMethod">
+                                <input class="formbold-input-radio active" asp-for="PaymentMethod" value="Cash" type="radio" name="PaymentMethod" id="PaymentMethod" checked>
                                 @_localizer["Cash"]
                                 <span class="formbold-radio-checkmark"></span>
                             </label>
@@ -206,78 +206,7 @@
                 @* PaymentMethod *@
             </div>
 
-            <div class="formbold-form-step-3">
-
-                <div class="formbold-mb-3">
-                    <label class="formbold-form-label">  @_localizer["BName"] </label>
-                    <input value="@Model.Name"
-                           class="formbold-form-input" disabled />
-                </div>
-
-                <div class="formbold-mb-3">
-                    <label class="formbold-form-label"> @_localizer["BPhone"] </label>
-                    <input value="@Model.Phone"
-                           class="formbold-form-input" disabled />
-                </div>
-
-                <div class="formbold-mb-3">
-                    <label class="formbold-form-label"> @_localizer["BAddress"] </label>
-                    <input value="@Model.Adress"
-                           class="formbold-form-input" disabled />
-                </div>
-
-                <div class="formbold-mb-3">
-                    <label class="formbold-form-label">  @_localizer["PickupDate"] </label>
-                    <input value="@Model.PickupDate"
-                           class="formbold-form-input" disabled />
-                </div>
-
-                <hr />
-
-                <div class="formbold-mb-3">
-                    <label class="formbold-form-label">  @_localizer["CName"] </label>
-                    <input value="@Model.CustomerName"
-                           class="formbold-form-input" disabled />
-                </div>
-
-                <div class="formbold-mb-3">
-                    <labe class="formbold-form-label"> @_localizer["CAddress"] </labe>
-                    <input value="@Model.CustomerAdress"
-                           class="formbold-form-input" disabled />
-                </div>
-
-                <div class="formbold-mb-3">
-                    <labe class="formbold-form-label"> @_localizer["CAddressDetails"] </labe>
-                    <input value="@Model.CustomerAdressDetails"
-                           class="formbold-form-input" disabled />
-                </div>
-
-                <div class="formbold-mb-3">
-                    <label class="formbold-form-label">  @_localizer["CPhone"] </label>
-                    <input value="@Model.CustomerPhone"
-                           class="formbold-form-input" disabled />
-                </div>
-
-                <hr />
-
-                <div class="formbold-mb-3">
-                    <label class="formbold-form-label"> @_localizer["OrderPrice"] </label>
-                    <input value="@Model.OrderPrice"
-                           class="formbold-form-input" disabled />
-                </div>
-
-                <div class="formbold-mb-3">
-                    <label class="formbold-form-label"> @_localizer["DeliveryFee"] </label>
-                    <input value="@Model.DeliveryFee"
-                           class="formbold-form-input" disabled />
-                </div>
-
-                <div class="formbold-mb-3">
-                    <label class="formbold-form-label"> @_localizer["Total"] </label>
-                    <input value="@Model.DeliveryFee"
-                           class="formbold-form-input" disabled />
-                </div>
-
+            <div class="formbold-form-step-3" id="previewOrder">
             </div>
 
             <div class="formbold-form-btn-wrapper">
@@ -400,6 +329,25 @@
             }
 
             return $('#createOrderForm').valid();
+        }
+
+        function getOrderPreview() {
+            
+            var formData = new FormData(document.getElementById('createOrderForm'));
+
+            $.ajax({
+                url: "@Url.Action("GetPreview", "Home")",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response){
+                    $('#previewOrder').html(response)
+                },
+                error: function(xhr, textStatus, error){
+                    // Handle error response
+                }
+            });
         }
 
         document.getElementById('orderPrice').addEventListener('change', calculateTotal);

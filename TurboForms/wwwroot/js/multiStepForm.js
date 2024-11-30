@@ -54,7 +54,9 @@ formSubmitBtn.addEventListener("click", function (event) {
         stepThree.classList.add('active')
 
         formBackBtn.classList.remove('active')
-        formSubmitBtn.textContent = 'Submit'
+        formSubmitBtn.textContent = 'تأكيد'
+
+        getOrderPreview()
 
     }
     else if (stepMenuThree.className == 'formbold-step-menu3 active') {

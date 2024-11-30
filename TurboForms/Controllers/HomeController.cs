@@ -30,7 +30,13 @@ namespace TurboForms.Controllers
 
             return View(res);
         }
-
+        
+        [HttpPost]
+        public IActionResult GetPreview(CreateOrder Order)
+        {
+            return PartialView("_previewOrder", Order);
+        }
+        //GetPreview
         private async Task<bool> SendToShipday(CreateOrder Order)
         {
             using var client = new HttpClient();
