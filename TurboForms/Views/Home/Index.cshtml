@@ -1,0 +1,414 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model TurboForms.ViewModels.CreateOrder;
+
+<div class="formbold-main-wrapper" dir="rtl">
+    <!-- Author: FormBold Team -->
+    <!-- Learn More: https://formbold.com -->
+    <div class="formbold-form-wrapper">
+
+        <form asp-action="SubmitForm" method="post" id="createOrderForm">
+
+            <div class="formbold-steps">
+                <ul>
+                    <li class="formbold-step-menu1 active">
+                        <span>1</span>
+                        @_localizer["Information"]
+                    </li>
+                    <li class="formbold-step-menu2">
+                        <span>2</span>
+                        @_localizer["OrderDetails"]
+                    </li>
+                    <li class="formbold-step-menu3">
+                        <span>3</span>
+                        @_localizer["Confirm"]
+                    </li>
+                </ul>
+            </div>
+
+            <div class="formbold-form-step-1 active">
+                <div class="formbold-input-radio-wrapper">
+                    <label for="OrderStatus" class="formbold-form-label"> @_localizer["breakable"] </label>
+
+                    <div class="formbold-radio-flex">
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" asp-for="OrderStatus" value="true" type="radio" name="OrderStatus" id="OrderStatus">
+                                @_localizer["yes"]
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" asp-for="OrderStatus" value="false" type="radio" name="OrderStatus" id="OrderStatus">
+                                @_localizer["no"]
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="formbold-mb-3">
+                    <label for="firstname" class="formbold-form-label"> @_localizer["BName"] </label>
+                    <input type="text"
+                           asp-for="Name"
+                           id="firstname"
+                           placeholder="@_localizer["BName"]"
+                           class="formbold-form-input" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="formbold-mb-3">
+                    <label for="address" class="formbold-form-label"> @_localizer["BAddress"] </label>
+                    <input type="text"
+                           asp-for="Adress"
+                           id="address1"
+                           placeholder="@_localizer["BAddress"]"
+                           class="formbold-form-input" />
+                    <span asp-validation-for="Adress" class="text-danger"></span>
+                </div>
+
+                <div class="formbold-mb-3">
+                    <label for="phone" class="formbold-form-label"> @_localizer["BPhone"] </label>
+                    <input type="text"
+                           asp-for="Phone"
+                           id="phone"
+                           placeholder="@_localizer["BPhone"]"
+                           class="formbold-form-input" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+
+                <div class="formbold-mb-3">
+                    <label for="pickupdate" class="formbold-form-label"> @_localizer["PickupDate"] </label>
+                    <input type="datetime-local"
+                           asp-for="PickupDate"
+                           id="pickupdate"
+                           value="@DateTime.Now.ToString("yyyy-MM-ddThh:mm")"
+                           placeholder="delivery date"
+                           class="formbold-form-input" />
+                    <span asp-validation-for="PickupDate" class="text-danger"></span>
+                </div>
+
+                <hr />
+
+                <div class="formbold-mb-3">
+                    <label for="CName" class="formbold-form-label"> @_localizer["CName"] </label>
+                    <input type="text"
+                           asp-for="CustomerName"
+                           id="CName"
+                           placeholder="@_localizer["CName"]"
+                           class="formbold-form-input" />
+                    <span asp-validation-for="CustomerName" class="text-danger"></span>
+                </div>
+
+                <div class="formbold-mb-3">
+                    <label for="address" class="formbold-form-label"> @_localizer["CAddress"] </label>
+                    <input type="text"
+                           asp-for="CustomerAdress"
+                           id="address2"
+                           placeholder="@_localizer["CAddress"]"
+                           class="formbold-form-input" />
+                    <span asp-validation-for="CustomerAdress" class="text-danger"></span>
+                </div>
+
+                <div class="formbold-mb-3">
+                    <labe class="formbold-form-label"> @_localizer["CAddressDetails"] </labe>
+                    <input type="text"
+                           value="@Model.CustomerAdressDetails"
+                           asp-for="CustomerAdressDetails"
+                           class="formbold-form-input" />
+                    <span asp-validation-for="CustomerAdressDetails" class="text-danger"></span>
+                </div>
+
+                <div class="formbold-mb-3">
+                    <label for="Cphone" class="formbold-form-label"> @_localizer["CPhone"] </label>
+                    <input type="text"
+                           asp-for="CustomerPhone"
+                           id="Cphone"
+                           placeholder="@_localizer["CPhone"]"
+                           class="formbold-form-input" />
+                    <span asp-validation-for="CustomerPhone" class="text-danger"></span>
+                </div>
+
+                @* <div class="formbold-mb-3">
+                    <label for="deliverydate" class="formbold-form-label"> Delivery date </label>
+                    <input type="datetime-local"
+                           name="deliverydate"
+                           id="deliverydate" 
+                           value="@DateTime.Now"
+                           class="formbold-form-input" />
+                </div> *@
+
+            </div>
+
+            <div class="formbold-form-step-2">
+                <div class="formbold-mb-3">
+                    <label for="orderPrice" class="formbold-form-label"> @_localizer["OrderPrice"] </label>
+                    <input type="number"
+                           asp-for="OrderPrice"
+                           id="orderPrice"
+                           placeholder="0"
+                           class="formbold-form-input" />
+                </div>
+
+                <div class="formbold-mb-3">
+                    <label for="deliveryFee" class="formbold-form-label"> @_localizer["DeliveryFee"] </label>
+                    <input type="number"
+                           asp-for="DeliveryFee"
+                           id="deliveryFee"
+                           placeholder="0"
+                           class="formbold-form-input" disabled />
+                </div>
+
+                <div class="formbold-mb-3">
+                    <label for="total" class="formbold-form-label"> @_localizer["Total"] </label>
+                    <input type="number"
+                           asp-for="Total"
+                           id="total"
+                           placeholder="0"
+                           class="formbold-form-input" disabled />
+                </div>
+
+                <div class="formbold-input-radio-wrapper">
+                    <label for="PaymentMethod" class="formbold-form-label"> @_localizer["PaymentMethod"] </label>
+
+                    <div class="formbold-radio-flex">
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" asp-for="PaymentMethod" value="Cash" type="radio" name="PaymentMethod" id="PaymentMethod">
+                                @_localizer["Cash"]
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" asp-for="PaymentMethod" value="Wallet" type="radio" name="PaymentMethod" id="PaymentMethod">
+                                @_localizer["wallet"]
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" asp-for="PaymentMethod" value="Instapay" type="radio" name="PaymentMethod" id="PaymentMethod">
+                                @_localizer["Instapay"]
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                @* PaymentMethod *@
+            </div>
+
+            <div class="formbold-form-step-3">
+
+                <div class="formbold-mb-3">
+                    <label class="formbold-form-label">  @_localizer["BName"] </label>
+                    <input value="@Model.Name"
+                           class="formbold-form-input" disabled />
+                </div>
+
+                <div class="formbold-mb-3">
+                    <label class="formbold-form-label"> @_localizer["BPhone"] </label>
+                    <input value="@Model.Phone"
+                           class="formbold-form-input" disabled />
+                </div>
+
+                <div class="formbold-mb-3">
+                    <label class="formbold-form-label"> @_localizer["BAddress"] </label>
+                    <input value="@Model.Adress"
+                           class="formbold-form-input" disabled />
+                </div>
+
+                <div class="formbold-mb-3">
+                    <label class="formbold-form-label">  @_localizer["PickupDate"] </label>
+                    <input value="@Model.PickupDate"
+                           class="formbold-form-input" disabled />
+                </div>
+
+                <hr />
+
+                <div class="formbold-mb-3">
+                    <label class="formbold-form-label">  @_localizer["CName"] </label>
+                    <input value="@Model.CustomerName"
+                           class="formbold-form-input" disabled />
+                </div>
+
+                <div class="formbold-mb-3">
+                    <labe class="formbold-form-label"> @_localizer["CAddress"] </labe>
+                    <input value="@Model.CustomerAdress"
+                           class="formbold-form-input" disabled />
+                </div>
+
+                <div class="formbold-mb-3">
+                    <labe class="formbold-form-label"> @_localizer["CAddressDetails"] </labe>
+                    <input value="@Model.CustomerAdressDetails"
+                           class="formbold-form-input" disabled />
+                </div>
+
+                <div class="formbold-mb-3">
+                    <label class="formbold-form-label">  @_localizer["CPhone"] </label>
+                    <input value="@Model.CustomerPhone"
+                           class="formbold-form-input" disabled />
+                </div>
+
+                <hr />
+
+                <div class="formbold-mb-3">
+                    <label class="formbold-form-label"> @_localizer["OrderPrice"] </label>
+                    <input value="@Model.OrderPrice"
+                           class="formbold-form-input" disabled />
+                </div>
+
+                <div class="formbold-mb-3">
+                    <label class="formbold-form-label"> @_localizer["DeliveryFee"] </label>
+                    <input value="@Model.DeliveryFee"
+                           class="formbold-form-input" disabled />
+                </div>
+
+                <div class="formbold-mb-3">
+                    <label class="formbold-form-label"> @_localizer["Total"] </label>
+                    <input value="@Model.DeliveryFee"
+                           class="formbold-form-input" disabled />
+                </div>
+
+            </div>
+
+            <div class="formbold-form-btn-wrapper">
+                <button class="formbold-back-btn">
+                    @_localizer["Back"]
+                </button>
+
+                <button class="formbold-btn">
+                    @_localizer["Next"]
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_1675_1807)">
+                            <path d="M10.7814 7.33312L7.20541 3.75712L8.14808 2.81445L13.3334 7.99979L8.14808 13.1851L7.20541 12.2425L10.7814 8.66645H2.66675V7.33312H10.7814Z" fill="white" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_1675_1807">
+                                <rect width="16" height="16" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </button>
+            </div>
+
+            <input type="hidden" id="distance" />
+
+            @* <div class="formbold-mb-3" style="display:none;">
+                <button id="calculate-distance" type="button">Calculate Distance</button>
+                <p>Distance: <span id="distance"></span></p>
+                <p>Duration: <span id="duration"></span></p>
+            </div> *@
+
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBL3yuXF5CTvGvQey6S45zuHfx0o1KdWA&libraries=places"></script>
+
+    <script>
+        let autocomplete1, autocomplete2;
+
+        function initAutocomplete() {
+          //$('#pickupdate').datetimepicker();
+
+          // Initialize Google Maps Places Autocomplete
+          autocomplete1 = new google.maps.places.Autocomplete(document.getElementById('address1'), { types: ['geocode'] });
+          autocomplete2 = new google.maps.places.Autocomplete(document.getElementById('address2'), { types: ['geocode'] });
+        }
+
+        function calculateDistanceMatrix() {
+
+          const address1 = document.getElementById('address1').value;
+          const address2 = document.getElementById('address2').value;
+          const travelMode = 'driving';
+
+          if (!address1 || !address2) {
+            alert('Please enter both addresses.');
+            return;
+          }
+
+          // Initialize the Distance Matrix Service
+          const service = new google.maps.DistanceMatrixService();
+
+          service.getDistanceMatrix(
+            {
+              origins: [address1],
+              destinations: [address2],
+              travelMode: travelMode.toUpperCase(),
+            },
+            (response, status) => {
+              if (status === 'OK') {
+                const result = response.rows[0].elements[0];
+                console.log(result)
+                if (result.status === 'OK') {
+                  // Display distance and duration
+                  document.getElementById('distance').textContent = result.distance.text;
+                  //document.getElementById('duration').textContent = result.duration.text;
+                  calculateDeliveryFee(result.distance.value)
+                } else {
+                  alert('Could not calculate distance: ' + result.status);
+                }
+              } else {
+                alert('Error with Distance Matrix request: ' + status);
+              }
+            }
+          );
+        }
+
+        function calculateDeliveryFee(distance) {
+            distance = distance/1000;
+            var subTotal = distance * 4.5;
+            subTotal = (Math.round(subTotal/5))*5;
+
+            if(subTotal < 20)
+                subTotal = 20;
+
+            document.getElementById('deliveryFee').value = subTotal;
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+
+            var delivery = parseFloat(document.getElementById('deliveryFee').value) || 0;
+            var order = parseFloat(document.getElementById('orderPrice').value) || 0;
+
+            document.getElementById('total').value = delivery + order;
+        }
+
+        function validateInfo(){
+            $("#createOrderForm").validate();
+
+            if ($('#createOrderForm').valid() === true) {
+                console.log("valid");
+            } else {
+                console.log("invalid");
+            }
+
+            return $('#createOrderForm').valid();
+        }
+
+        document.getElementById('orderPrice').addEventListener('change', calculateTotal);
+
+        //document.getElementById('calculate-distance').addEventListener('click', calculateDistanceMatrix);
+
+        // Initialize autocomplete when the page loads
+        document.addEventListener('DOMContentLoaded', initAutocomplete);
+    </script>
+
+    <script src="~/js/multistepform.js"></script>
+}

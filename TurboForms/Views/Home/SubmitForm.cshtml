@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model bool;
+
+<div class="page-wrapper">
+    @if(Model){
+
+        <div class="custom-modal">
+            <div class="succes succes-animation icon-top"><i class="fa fa-check"></i></div>
+            <div class="succes border-bottom"></div>
+            <div class="content">
+                <p class="type">Order</p>
+                <p class="message-type">Successfully Booked</p>
+            </div>
+        </div>
+    }
+    else{
+
+        <div class="custom-modal">
+            <div class="danger danger-animation icon-top"><i class="fa fa-times"></i></div>
+            <div class="danger border-bottom"></div>
+            <div class="content">
+                <p class="type">Order</p>
+                <p class="message-type">A Problem Occurred </p>
+            </div>
+        </div>
+    }
+</div>
