@@ -3,10 +3,10 @@
 }
 @model TurboForms.ViewModels.CreateOrder;
 
-<div class="formbold-main-wrapper" dir="rtl">
+<div class="formbold-main-wrapper row justify-content-center" dir="rtl">
     <!-- Author: FormBold Team -->
     <!-- Learn More: https://formbold.com -->
-    <div class="formbold-form-wrapper">
+    <div class=" col-md-5"> @* formbold-form-wrapper *@
 
         <form asp-action="SubmitForm" method="post" id="createOrderForm">
 
@@ -306,7 +306,7 @@
 
         function calculateDeliveryFee(distance) {
             distance = distance/1000;
-            var subTotal = distance * 4.5;
+            var subTotal = distance * 6;
             subTotal = (Math.round(subTotal/5))*5;
 
             if(subTotal < 20)
