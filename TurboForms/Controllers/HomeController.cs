@@ -8,20 +8,29 @@ using System.Runtime.Serialization.Json;
 
 namespace TurboForms.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(ILogger<HomeController> logger) : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        private readonly ILogger<HomeController> _logger = logger;
+        private double DeliveryFee { set; get; }
 
         public IActionResult Index()
         {
             return View(new CreateOrder());
         }
 
+        [HttpPost]
+        public IActionResult GetDeliveryFee(double distance1, double distance2)
+        {
+            double SubTotal = (distance1 / 1000) * 2 + (distance2 / 1000);
+            SubTotal *= 2;
+
+            var Total = Math.Round(SubTotal / 5) * 5;
+            Total = Math.Max(Total, 20);
+
+            DeliveryFee = Total;
+
+            return Json(new { Total });
+        }
         [HttpPost]
         public async Task<IActionResult> SubmitFormAsync(CreateOrder Order)
         {
@@ -30,12 +39,13 @@ namespace TurboForms.Controllers
 
             return View(true);
         }
-        
+
         [HttpPost]
         public IActionResult GetPreview(CreateOrder Order)
         {
             return PartialView("_previewOrder", Order);
         }
+
         //GetPreview
         private async Task<bool> SendToShipday(CreateOrder Order)
         {
@@ -52,7 +62,7 @@ namespace TurboForms.Controllers
             // Define the request payload
             var payload = new
             {
-                orderNumber = Guid.NewGuid().ToString().Substring(0, 5),
+                orderNumber = "F-" + Guid.NewGuid().ToString().Substring(0, 5),
                 customerName = Order.CustomerName,
                 customerAddress = Order.CustomerAdress + " " + Order.CustomerAdressDetails,
                 customerPhoneNumber = Order.CustomerPhone,
@@ -62,7 +72,7 @@ namespace TurboForms.Controllers
                 expectedDeliveryDate = Order.PickupDate.ToString("yyyy-MM-dd"),
                 expectedPickupTime = Order.PickupDate.ToString("HH:mm:ss"),
                 deliveryFee = Order.DeliveryFee,
-                totalOrderCost = Order.Total,
+                totalOrderCost = Order.DeliveryFee + Order.OrderPrice,
                 deliveryInstruction = Order.OrderStatus ? "قابلة للكسر" : "غير قابلة للكسر",
                 paymentMethod = Order.PaymentMethod,
                 orderItem = new[]

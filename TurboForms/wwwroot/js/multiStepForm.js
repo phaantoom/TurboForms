@@ -18,6 +18,7 @@ formSubmitBtn.addEventListener("click", function (event) {
         var valid = validateInfo()
 
         if (valid) {
+            formSubmitBtn.disabled = true;
 
             calculateDistanceMatrix()
 
@@ -46,6 +47,8 @@ formSubmitBtn.addEventListener("click", function (event) {
     } else if (stepMenuTwo.className == 'formbold-step-menu2 active') {
 
         event.preventDefault()
+
+        formSubmitBtn.disabled = true;
 
         stepMenuTwo.classList.remove('active')
         stepMenuThree.classList.add('active')

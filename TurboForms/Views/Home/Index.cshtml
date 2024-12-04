@@ -6,7 +6,8 @@
 <div class="formbold-main-wrapper row justify-content-center" dir="rtl">
     <!-- Author: FormBold Team -->
     <!-- Learn More: https://formbold.com -->
-    <div class=" col-md-5"> @* formbold-form-wrapper *@
+    <div class=" col-md-5">
+        @* formbold-form-wrapper *@
 
         <form asp-action="SubmitForm" method="post" id="createOrderForm">
 
@@ -116,7 +117,7 @@
                 </div>
 
                 <div class="formbold-mb-3">
-                    <labe class="formbold-form-label"> @_localizer["CAddressDetails"] </labe>
+                    <label class="formbold-form-label"> @_localizer["CAddressDetails"] </label>
                     <input type="text"
                            value="@Model.CustomerAdressDetails"
                            asp-for="CustomerAdressDetails"
@@ -234,7 +235,7 @@
                 </button>
             </div>
 
-            <input type="hidden" id="distance" />
+            @* <input type="hidden" id="distance" /> *@
 
             @* <div class="formbold-mb-3" style="display:none;">
                 <button id="calculate-distance" type="button">Calculate Distance</button>
@@ -248,73 +249,118 @@
 
 
 @section Scripts {
+
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBL3yuXF5CTvGvQey6S45zuHfx0o1KdWA&libraries=places"></script>
+    <script type="text/javascript">
+        const garageLtLg = new google.maps.LatLng( 30.315741, 31.737745);
 
-    <script>
         let autocomplete1, autocomplete2;
 
         function initAutocomplete() {
           //$('#pickupdate').datetimepicker();
 
           // Initialize Google Maps Places Autocomplete
-          autocomplete1 = new google.maps.places.Autocomplete(document.getElementById('address1'), { types: ['geocode'] });
-          autocomplete2 = new google.maps.places.Autocomplete(document.getElementById('address2'), { types: ['geocode'] });
+            autocomplete1 = new google.maps.places.Autocomplete(document.getElementById('address1'),
+            {
+                componentRestrictions: { country: "eg" }, // Restrict to Egypt
+                types: ['geocode']
+            });
+            autocomplete2 = new google.maps.places.Autocomplete(document.getElementById('address2'),
+            {
+                componentRestrictions: { country: "eg" }, // Restrict to Egypt
+                types: ['geocode']
+            });
         }
 
         function calculateDistanceMatrix() {
+            let distance1, distance2;
+            const address1 = document.getElementById('address1').value;
+            const address2 = document.getElementById('address2').value;
+            const travelMode = 'driving';
 
-          const address1 = document.getElementById('address1').value;
-          const address2 = document.getElementById('address2').value;
-          const travelMode = 'driving';
-
-          if (!address1 || !address2) {
+            if (!address1 || !address2) {
             alert('Please enter both addresses.');
             return;
-          }
-
-          // Initialize the Distance Matrix Service
-          const service = new google.maps.DistanceMatrixService();
-
-          service.getDistanceMatrix(
-            {
-              origins: [address1],
-              destinations: [address2],
-              travelMode: travelMode.toUpperCase(),
-            },
-            (response, status) => {
-              if (status === 'OK') {
-                const result = response.rows[0].elements[0];
-                console.log(result)
-                if (result.status === 'OK') {
-                  // Display distance and duration
-                  document.getElementById('distance').textContent = result.distance.text;
-                  //document.getElementById('duration').textContent = result.duration.text;
-                  calculateDeliveryFee(result.distance.value)
-                } else {
-                  alert('Could not calculate distance: ' + result.status);
-                }
-              } else {
-                alert('Error with Distance Matrix request: ' + status);
-              }
             }
-          );
+
+            // Initialize the Distance Matrix Service
+            const service = new google.maps.DistanceMatrixService();
+
+            service.getDistanceMatrix(
+            {
+                origins:[garageLtLg],
+                destinations: [address1],
+                travelMode: travelMode.toUpperCase(),
+            },
+            (response1, status1) => {
+                if (status1 === 'OK') {
+                const result1 = response1.rows[0].elements[0];
+                if (result1.status === 'OK') {
+                    console.log(result1)
+                    // Display distance and duration
+                    //document.getElementById('distance').textContent = result.distance.text;
+                    //document.getElementById('duration').textContent = result.duration.text;
+                    distance1 = result1.distance.value;
+
+                    service.getDistanceMatrix(
+                    {
+                        origins: [address1],
+                        destinations: [address2],
+                        travelMode: travelMode.toUpperCase(),
+                    },
+                    (response, status) => {
+                        if (status === 'OK') {
+                        const result = response.rows[0].elements[0];
+                        if (result.status === 'OK') {
+                            // Display distance and duration
+                            //document.getElementById('distance').textContent = result.distance.text;
+                            //document.getElementById('duration').textContent = result.duration.text;
+                            distance2 = result.distance.value;
+                            console.log(result)
+                            calculateDeliveryFee(distance1,distance2);
+                        } else {
+                            alert('Could not calculate distance: ' + result.status);
+                        }
+                        } else {
+                            alert('Error with Distance Matrix request: ' + status);
+                        }
+                    });
+                } else {
+                    alert('Could not calculate distance: ' + result1.status);
+                }
+                } else {
+                alert('Error with Distance Matrix request: ' + status);
+                }
+            }
+            );
+
         }
 
-        function calculateDeliveryFee(distance) {
-            distance = distance/1000;
-            var subTotal = distance * 6;
-            subTotal = (Math.round(subTotal/5))*5;
+        function calculateDeliveryFee(distance1,distance2) {
 
-            if(subTotal < 20)
-                subTotal = 20;
+            $.ajax({
+                url: "@Url.Action("GetDeliveryFee", "Home")",
+                type: "POST",
+                data: {
+                    distance1:distance1,
+                    distance2:distance2
+                },
+                success: function(response){
+                    document.getElementById('deliveryFee').value = response.total;
+                    document.getElementById('deliveryFeeHidden').value = response.total;
 
-            document.getElementById('deliveryFee').value = subTotal;
-            document.getElementById('deliveryFeeHidden').value = subTotal;
-            calculateTotal();
+                    calculateTotal();
+
+                    document.querySelector('.formbold-btn').disabled = false;
+                },
+                error: function(xhr, textStatus, error){
+                    // Handle error response
+                }
+            });
+
         }
 
         function calculateTotal() {
@@ -350,6 +396,7 @@
                 contentType: false,
                 success: function(response){
                     $('#previewOrder').html(response)
+                    document.querySelector('.formbold-btn').disabled = false;
                 },
                 error: function(xhr, textStatus, error){
                     // Handle error response
