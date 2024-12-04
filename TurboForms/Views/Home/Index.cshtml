@@ -299,7 +299,6 @@
                 if (status1 === 'OK') {
                 const result1 = response1.rows[0].elements[0];
                 if (result1.status === 'OK') {
-                    console.log(result1)
                     // Display distance and duration
                     //document.getElementById('distance').textContent = result.distance.text;
                     //document.getElementById('duration').textContent = result.duration.text;
@@ -318,8 +317,7 @@
                             // Display distance and duration
                             //document.getElementById('distance').textContent = result.distance.text;
                             //document.getElementById('duration').textContent = result.duration.text;
-                            distance2 = result.distance.value;
-                            console.log(result)
+                            distance2 = result.distance.value;\
                             calculateDeliveryFee(distance1,distance2);
                         } else {
                             alert('Could not calculate distance: ' + result.status);
