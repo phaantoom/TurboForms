@@ -11,7 +11,7 @@ namespace TurboForms.Controllers
     public class HomeController(ILogger<HomeController> logger) : Controller
     {
         private readonly ILogger<HomeController> _logger = logger;
-        private double DeliveryFee { set; get; }
+        private static double DeliveryFee { set; get; }
 
         public IActionResult Index()
         {
@@ -21,8 +21,22 @@ namespace TurboForms.Controllers
         [HttpPost]
         public IActionResult GetDeliveryFee(double distance1, double distance2)
         {
-            double SubTotal = (distance1 / 1000) * 2 + (distance2 / 1000);
-            SubTotal *= 2;
+            double SubTotal;
+
+            distance1 = (distance1 / 1000);
+            distance2 = (distance2 / 1000);
+
+            //double SubTotal = (distance1 / 1000) * 2 + (distance2 / 1000);
+            //SubTotal *= 2;
+
+            if (distance1 < 5)
+            {
+                SubTotal = (distance2 * 3) + 15;
+            }
+            else
+            {
+                SubTotal = (distance2 * 3) + distance1 + 15;
+            }
 
             var Total = Math.Round(SubTotal / 5) * 5;
             Total = Math.Max(Total, 20);
@@ -71,8 +85,8 @@ namespace TurboForms.Controllers
                 restaurantPhoneNumber = Order.Phone,
                 expectedDeliveryDate = Order.PickupDate.ToString("yyyy-MM-dd"),
                 expectedPickupTime = Order.PickupDate.ToString("HH:mm:ss"),
-                deliveryFee = Order.DeliveryFee,
-                totalOrderCost = Order.DeliveryFee + Order.OrderPrice,
+                deliveryFee = DeliveryFee,
+                totalOrderCost = DeliveryFee + Order.OrderPrice,
                 deliveryInstruction = Order.OrderStatus ? "قابلة للكسر" : "غير قابلة للكسر",
                 paymentMethod = Order.PaymentMethod,
                 orderItem = new[]

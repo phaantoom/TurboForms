@@ -56,14 +56,28 @@ formSubmitBtn.addEventListener("click", function (event) {
         stepTwo.classList.remove('active')
         stepThree.classList.add('active')
 
-        formBackBtn.classList.remove('active')
+        //formBackBtn.classList.remove('active')
         formSubmitBtn.textContent = 'تأكيد'
 
         getOrderPreview()
 
+        formBackBtn.addEventListener("click", function (event) {
+            event.preventDefault()
+
+            stepMenuOne.classList.add('active')
+            stepMenuThree.classList.remove('active')
+
+            stepOne.classList.add('active')
+            stepThree.classList.remove('active')
+
+            formBackBtn.classList.remove('active')
+
+        })
+
     }
     else if (stepMenuThree.className == 'formbold-step-menu3 active') {
         document.querySelector('form').submit()
+
     }
 
 })
