@@ -147,6 +147,14 @@
 
             <div class="formbold-form-step-2">
                 <div class="formbold-mb-3">
+                    <label class="formbold-form-label"> @_localizer["OrderDetails"] </label>
+                    <input type="text"
+                           value="@Model.OrderDetails"
+                           asp-for="OrderDetails"
+                           class="formbold-form-input" />
+                </div>
+
+                <div class="formbold-mb-3">
                     <label for="orderPrice" class="formbold-form-label"> @_localizer["OrderPrice"] </label>
                     <input type="number"
                            asp-for="OrderPrice"

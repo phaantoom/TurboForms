@@ -91,7 +91,7 @@ namespace TurboForms.Controllers
                 paymentMethod = Order.PaymentMethod,
                 orderItem = new[]
                 {
-                    new { name = "order", quantity = 1, unitPrice = Order.OrderPrice, detail = "" }
+                    new { name = "order", quantity = 1, unitPrice = Order.OrderPrice, detail = Order.OrderDetails }
                 }
             };
 

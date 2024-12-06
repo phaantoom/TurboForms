@@ -23,7 +23,7 @@ namespace TurboForms.ViewModels
         public double DeliveryFee { get; set; }
         public double Total { get; set; }
         public bool OrderStatus { get; set; } //breakable or not
-        public string OrderDetails { get; set; } = string.Empty;
+        public string? OrderDetails { get; set; } = string.Empty;
         public string PaymentMethod { get; set; } //Cash/wallet/instapay
     }
 }
