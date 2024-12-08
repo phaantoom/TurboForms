@@ -25,5 +25,6 @@ namespace TurboForms.ViewModels
         public bool OrderStatus { get; set; } //breakable or not
         public string? OrderDetails { get; set; } = string.Empty;
         public string PaymentMethod { get; set; } //Cash/wallet/instapay
+        public string FormType { get; set; } //C-/B-/P-
     }
 }

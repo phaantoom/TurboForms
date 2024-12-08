@@ -30,6 +30,36 @@
 
             <div class="formbold-form-step-1 active">
                 <div class="formbold-input-radio-wrapper">
+                    <label for="FormType" class="formbold-form-label"> @_localizer["Are_You"] </label>
+
+                    <div class="formbold-radio-flex">
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio active" asp-for="FormType" value="C-" type="radio" name="FormType" id="FormType" checked>
+                                @_localizer["Customer"]
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" asp-for="FormType" value="B-" type="radio" name="FormType" id="FormType">
+                                @_localizer["Business"]
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" asp-for="FormType" value="P-" type="radio" name="FormType" id="FormType">
+                                @_localizer["Pharmacy"]
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="formbold-input-radio-wrapper">
                     <label for="OrderStatus" class="formbold-form-label"> @_localizer["breakable"] </label>
 
                     <div class="formbold-radio-flex">
@@ -148,10 +178,11 @@
             <div class="formbold-form-step-2">
                 <div class="formbold-mb-3">
                     <label class="formbold-form-label"> @_localizer["OrderDetails"] </label>
-                    <input type="text"
+                    <textarea rows="3" asp-for="OrderDetails" class="formbold-form-input"></textarea>
+                    @* <input type="text"
                            value="@Model.OrderDetails"
                            asp-for="OrderDetails"
-                           class="formbold-form-input" />
+                           class="formbold-form-input" /> *@
                 </div>
 
                 <div class="formbold-mb-3">
@@ -159,6 +190,7 @@
                     <input type="number"
                            asp-for="OrderPrice"
                            id="orderPrice"
+                           value=""
                            placeholder="0"
                            class="formbold-form-input" />
                 </div>
@@ -263,7 +295,7 @@
     }
 
     <script type="text/javascript">
-        const garageLtLg = new google.maps.LatLng( 30.315741, 31.737745);
+        const garageLtLg = new google.maps.LatLng(30.3031997,31.740927);
 
         let autocomplete1, autocomplete2;
 
@@ -274,12 +306,12 @@
             autocomplete1 = new google.maps.places.Autocomplete(document.getElementById('address1'),
             {
                 componentRestrictions: { country: "eg" }, // Restrict to Egypt
-                types: ['geocode']
+                // types: ['geocode']
             });
             autocomplete2 = new google.maps.places.Autocomplete(document.getElementById('address2'),
             {
                 componentRestrictions: { country: "eg" }, // Restrict to Egypt
-                types: ['geocode']
+                // types: ['geocode']
             });
         }
 

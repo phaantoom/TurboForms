@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Are_You" xml:space="preserve">
+    <value>هل انت</value>
+  </data>
   <data name="Back" xml:space="preserve">
     <value>السابق</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="breakable" xml:space="preserve">
     <value>قابل للكسر او التلف ؟</value>
+  </data>
+  <data name="Business" xml:space="preserve">
+    <value>بيزنس</value>
   </data>
   <data name="CAddress" xml:space="preserve">
     <value>عنوان المستلم</value>
@@ -150,11 +156,17 @@
   <data name="CPhone" xml:space="preserve">
     <value>رقم تليفون المستلم</value>
   </data>
+  <data name="Customer" xml:space="preserve">
+    <value>شخص</value>
+  </data>
   <data name="DeliveryFee" xml:space="preserve">
     <value>رسوم التوصيل</value>
   </data>
   <data name="error" xml:space="preserve">
     <value>حدث خطأ, حاول مجددا </value>
+  </data>
+  <data name="FormType" xml:space="preserve">
+    <value>الجهة</value>
   </data>
   <data name="Information" xml:space="preserve">
     <value>بيانات العميل</value>
@@ -179,6 +191,9 @@
   </data>
   <data name="PaymentMethod" xml:space="preserve">
     <value>طريقة الدفع</value>
+  </data>
+  <data name="Pharmacy" xml:space="preserve">
+    <value>صيدلية</value>
   </data>
   <data name="PickupDate" xml:space="preserve">
     <value>تاريخ\وقت الاستلام</value>

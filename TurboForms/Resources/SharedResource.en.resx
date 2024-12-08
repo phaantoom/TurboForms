@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Are_You" xml:space="preserve">
+    <value>You are</value>
+  </data>
   <data name="Back" xml:space="preserve">
     <value>Back</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="breakable" xml:space="preserve">
     <value>Is it Breakable or damaged?</value>
+  </data>
+  <data name="Business" xml:space="preserve">
+    <value>Business</value>
   </data>
   <data name="CAddress" xml:space="preserve">
     <value>Customer Address</value>
@@ -150,11 +156,17 @@
   <data name="CPhone" xml:space="preserve">
     <value>Customer Phone</value>
   </data>
+  <data name="Customer" xml:space="preserve">
+    <value>Person</value>
+  </data>
   <data name="DeliveryFee" xml:space="preserve">
     <value>Delivery Fee</value>
   </data>
   <data name="error" xml:space="preserve">
     <value>A Problem Occurred</value>
+  </data>
+  <data name="FormType" xml:space="preserve">
+    <value>Type</value>
   </data>
   <data name="Information" xml:space="preserve">
     <value>Customer data</value>
@@ -179,6 +191,9 @@
   </data>
   <data name="PaymentMethod" xml:space="preserve">
     <value>Payment Method</value>
+  </data>
+  <data name="Pharmacy" xml:space="preserve">
+    <value>Pharmacy</value>
   </data>
   <data name="PickupDate" xml:space="preserve">
     <value>Pickup/Delivery date</value>

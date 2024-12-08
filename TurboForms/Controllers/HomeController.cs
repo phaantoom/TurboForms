@@ -76,7 +76,7 @@ namespace TurboForms.Controllers
             // Define the request payload
             var payload = new
             {
-                orderNumber = "F-" + Guid.NewGuid().ToString().Substring(0, 5),
+                orderNumber = Order.FormType + Guid.NewGuid().ToString().Substring(0, 5),
                 customerName = Order.CustomerName,
                 customerAddress = Order.CustomerAdress + " " + Order.CustomerAdressDetails,
                 customerPhoneNumber = Order.CustomerPhone,

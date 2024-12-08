@@ -58,6 +58,11 @@
 <hr />
 
 <div class="formbold-mb-3">
+    <label class="formbold-form-label"> @_localizer["OrderDetails"] </label>
+    <textarea rows="3" class="formbold-form-input" disabled>@Model.OrderDetails</textarea>
+</div>
+
+<div class="formbold-mb-3">
     <label class="formbold-form-label"> @_localizer["OrderPrice"] </label>
     <input value="@Model.OrderPrice"
            class="formbold-form-input" disabled />
